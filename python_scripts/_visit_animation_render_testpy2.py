@@ -1,3 +1,5 @@
+# Tyndale Stutzman 03.30.23
+
 import sys, csv
 sys.path.append("/usr/local/3.3.1/linux-x86_64/lib/site-packages") 
 import visit
