@@ -28,15 +28,15 @@ with open(destination_directory + filename, "w") as file:
         bh1[1] = radius * orbital_separation * sin(omega * time)
         bh1[2] = 0
         L1[0] = 0 
-        L1[1] = -2
+        L1[1] = -1
         L1[2] = 1
         #BH2 data
         bh2[0] = -radius * orbital_separation * cos(omega * time)
         bh2[1] = -radius * orbital_separation * sin(omega * time)
         bh2[2] = 0
         L2[0] = 0
-        L2[1] = 2
-        L2[2] = 1
+        L2[1] = 1.5
+        L2[2] = 0
 
         #typecast
         outstr = str(time) + ","

@@ -1,5 +1,3 @@
-# Tyndale Stutzman 03.30.23
-
 import sys, csv
 sys.path.append("/usr/local/3.3.1/linux-x86_64/lib/site-packages") 
 import visit
@@ -12,26 +10,51 @@ v = visit
 # bh1_x, bh2_x, etc are the values of the xyz coordinates of each black hole
 # L1_X, L2_x, etc are the xyz magnitudes of angular momentum (L) vectors 1 and 2.
 
+
+###File names
 database = "../database/mesh/iscos_halfr_sphere_sub8.obj"
 bh_data = "../database/synthetic_coords/synthetic_data_ang_momentum.csv"
+
+#Background Image Citation: ESA/Hubble & NASA, https://www.nasa.gov/image-feature/goddard/2016/hubble-spots-an-irregular-island-in-a-sea-of-space
+background_image = "../database/background_images/hubble_friday_edited.jpg"
+frame_name = "synthetic_BH_test_animation"
+movie_output_destination = "../movies/movie1"
+
+###Parameters
+green_screen = False
+show_axis_annotations = False
 
 
 
 def default_atts():
     AnnotationAtts = v.AnnotationAttributes()
-    AnnotationAtts.axes2D.visible = 0
-    AnnotationAtts.axes3D.visible = 0
-    AnnotationAtts.axes3D.triadFlag = 0
-    AnnotationAtts.axes3D.bboxFlag = 0
-    AnnotationAtts.axes3D.xAxis.grid = 0
-    AnnotationAtts.axes3D.yAxis.grid = 0
-    AnnotationAtts.axes3D.zAxis.grid = 0
-    AnnotationAtts.axes3D.triadLineWidth = 0
+    if show_axis_annotations == False:
+        AnnotationAtts.axes2D.visible = 0
+        AnnotationAtts.axes3D.visible = 0
+        AnnotationAtts.axes3D.triadFlag = 0
+        AnnotationAtts.axes3D.bboxFlag = 0
+        AnnotationAtts.axes3D.xAxis.grid = 0
+        AnnotationAtts.axes3D.yAxis.grid = 0
+        AnnotationAtts.axes3D.zAxis.grid = 0
+        AnnotationAtts.axes3D.triadLineWidth = 0
     AnnotationAtts.userInfoFlag = 0
     AnnotationAtts.databaseInfoFlag = 0
     AnnotationAtts.legendInfoFlag = 0
     AnnotationAtts.axesArray.lineWidth = 0
     AnnotationAtts.axesArray.axes.grid = 0
+
+    if green_screen:
+        AnnotationAtts.backgroundColor = (0, 255, 0, 255)
+        AnnotationAtts.foregroundColor = (255, 255, 255, 255)
+        AnnotationAtts.backgroundMode = AnnotationAtts.Solid  # Solid, Gradient, Image, ImageSphere
+    else:
+        AnnotationAtts.gradientBackgroundStyle = AnnotationAtts.Radial
+        AnnotationAtts.gradientColor1 = (76, 76, 76, 255)
+        AnnotationAtts.gradientColor2 = (25, 25, 25, 255)
+        AnnotationAtts.backgroundMode = AnnotationAtts.Gradient  # Solid, Gradient, Image, ImageSphere
+
+    #this doesn't work for some reason
+    AnnotationAtts.backgroundImage = background_image
     v.SetAnnotationAttributes(AnnotationAtts)
     
     View3DAtts = v.View3DAttributes()
@@ -48,12 +71,43 @@ def default_atts():
     light.type = light.Object 
     light.direction = (0.666, -0.666, -0.666)
     v.SetLight(0, light)
+        
+    RenderingAtts = v.RenderingAttributes()
+    RenderingAtts.specularFlag = 1
+    RenderingAtts.specularCoeff = 0.13
+    RenderingAtts.specularPower = 3.2
+    RenderingAtts.specularColor = (255, 255, 255, 255)
+    v.SetRenderingAttributes(RenderingAtts)
+
+    s = v.SaveWindowAttributes()
+    s.outputToCurrentDirectory = 0
+    s.outputDirectory = movie_output_destination
+    s.fileName = frame_name
+    s.format = s.PNG
+    s.progressive = 1
+    s.width = 772
+    s.height = 702
+    s.screenCapture = 1
+    v.SetSaveWindowAttributes(s)
 
 def create_spheres():
+    #set attributes
+    PseudocolorAtts = v.PseudocolorAttributes()
+    PseudocolorAtts.minFlag = 1
+    PseudocolorAtts.min = -0.1
+    PseudocolorAtts.useBelowMinColor = 1
+    PseudocolorAtts.belowMinColor = (31, 31, 31, 255)
+    PseudocolorAtts.maxFlag = 1
+    PseudocolorAtts.max = 0.1
+    PseudocolorAtts.useAboveMaxColor = 1
+    PseudocolorAtts.aboveMaxColor = (0, 255, 0, 255)
+
     v.AddPlot("Pseudocolor", "mesh_quality/warpage", 1, 1)
     v.AddOperator("Transform")
+    v.SetPlotOptions(PseudocolorAtts)
     v.AddPlot("Pseudocolor", "mesh_quality/warpage", 1, 1)
     v.AddOperator("Transform")
+    v.SetPlotOptions(PseudocolorAtts)
 
 def set_coords(objNum, x, y, z):
     v.SetActivePlots(objNum)
@@ -71,14 +125,22 @@ create_spheres()
 L1 = v.CreateAnnotationObject("Line3D")
 L2 = v.CreateAnnotationObject("Line3D")
 
-
 #to find annotation attributes
 #print(L1) 
 
+L1.useForegroundForLineColor = 0
+L1.color = (75, 35, 115, 255)
+L1.width = 3
 L1.arrow2 = 1
 L1.arrow2Height = 0.2
+L1.arrow2Radius = 0.075
+
+L2.useForegroundForLineColor = 0
+L2.color = (45, 25, 95, 255)
+L2.width = 3
 L2.arrow2 = 1
-L1.arrow2Height = 0.2
+L2.arrow2Height = 0.2
+L2.arrow2Radius = 0.075
 
 
 with open(bh_data, 'r') as file:
@@ -107,21 +169,12 @@ with open(bh_data, 'r') as file:
         set_coords(0, bh1_x, bh1_y, bh1_z)
         set_coords(1, bh2_x, bh2_y, bh2_z)
         v.DrawPlots()
-        s = v.SaveWindowAttributes()
-        s.fileName = "synthetic_BH_test_animation"
-        s.format = s.PNG
-        s.progressive = 1
-        s.width = 772
-        s.height = 702
-        s.screenCapture = 1
-        v.SetSaveWindowAttributes(s)
-        # Save the window
-        #v.SaveWindow()
         
-        #input_pattern = "synthetic_BH_test_animation_%04d.png"
-        #output_movie = "streamline_crop_example.mp4"
-        #v.encoding.encode(input_pattern,output_movie,fdup=4)
+        # Save the window
+        v.SaveWindow()
 
+#frame_name_pattern = "synthetic_BH_test_animation_%04d.png"
+#movie_name = "streamline_crop_example.mp4"
 # The following command worked to create a movie from the file of pngs
 #ffmpeg -framerate 1000 -i synthetic_BH_test_animation%04d.png -vf "scale=770:-2" -c:v libx264 -r 1000 -pix_fmt yuv420p output.mp4
 
