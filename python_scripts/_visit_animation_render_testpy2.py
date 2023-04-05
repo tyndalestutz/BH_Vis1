@@ -1,9 +1,12 @@
-import sys, csv
+import sys, csv, os
 sys.path.append("/usr/local/3.3.1/linux-x86_64/lib/site-packages") 
 import visit
 visit.Launch()
 import visit
 v = visit
+
+#parent_directory = os.path.dirname(os.path.abspath(__file__))
+#print("pd", parent_directory)
 
 # object 0: Black hole 1
 # object 1: Black hole 2
@@ -16,9 +19,9 @@ database = "../database/mesh/iscos_halfr_sphere_sub8.obj"
 bh_data = "../database/synthetic_coords/synthetic_data_ang_momentum.csv"
 
 #Background Image Citation: ESA/Hubble & NASA, https://www.nasa.gov/image-feature/goddard/2016/hubble-spots-an-irregular-island-in-a-sea-of-space
-background_image = "../database/background_images/hubble_friday_edited.jpg"
+background_image = "../database/background_images/blue_grid.png"
 frame_name = "synthetic_BH_test_animation"
-movie_output_destination = "../movies/movie1"
+movie_output_destination = "/movies/movie1"
 
 ###Parameters
 green_screen = False
@@ -27,35 +30,37 @@ show_axis_annotations = False
 
 
 def default_atts():
-    AnnotationAtts = v.AnnotationAttributes()
+    a = v.AnnotationAttributes()
     if show_axis_annotations == False:
-        AnnotationAtts.axes2D.visible = 0
-        AnnotationAtts.axes3D.visible = 0
-        AnnotationAtts.axes3D.triadFlag = 0
-        AnnotationAtts.axes3D.bboxFlag = 0
-        AnnotationAtts.axes3D.xAxis.grid = 0
-        AnnotationAtts.axes3D.yAxis.grid = 0
-        AnnotationAtts.axes3D.zAxis.grid = 0
-        AnnotationAtts.axes3D.triadLineWidth = 0
-    AnnotationAtts.userInfoFlag = 0
-    AnnotationAtts.databaseInfoFlag = 0
-    AnnotationAtts.legendInfoFlag = 0
-    AnnotationAtts.axesArray.lineWidth = 0
-    AnnotationAtts.axesArray.axes.grid = 0
+        a.axes2D.visible = 0
+        a.axes3D.visible = 0
+        a.axes3D.triadFlag = 0
+        a.axes3D.bboxFlag = 0
+        a.axes3D.xAxis.grid = 0
+        a.axes3D.yAxis.grid = 0
+        a.axes3D.zAxis.grid = 0
+        a.axes3D.triadLineWidth = 0
+    a.userInfoFlag = 0
+    a.databaseInfoFlag = 0
+    a.legendInfoFlag = 0
+    a.axesArray.lineWidth = 0
+    a.axesArray.axes.grid = 0
 
     if green_screen:
-        AnnotationAtts.backgroundColor = (0, 255, 0, 255)
-        AnnotationAtts.foregroundColor = (255, 255, 255, 255)
-        AnnotationAtts.backgroundMode = AnnotationAtts.Solid  # Solid, Gradient, Image, ImageSphere
+        a.backgroundColor = (0, 255, 0, 255)
+        a.foregroundColor = (255, 255, 255, 255)
+        a.backgroundMode = a.Solid  # Solid, Gradient, Image, ImageSphere
     else:
-        AnnotationAtts.gradientBackgroundStyle = AnnotationAtts.Radial
-        AnnotationAtts.gradientColor1 = (76, 76, 76, 255)
-        AnnotationAtts.gradientColor2 = (25, 25, 25, 255)
-        AnnotationAtts.backgroundMode = AnnotationAtts.Gradient  # Solid, Gradient, Image, ImageSphere
+        a.gradientBackgroundStyle = a.Image
+        a.gradientColor1 = (80, 80, 80, 255)
+        a.gradientColor2 = (70, 70, 70, 255)
+        a.backgroundMode = a.Image  # Solid, Gradient, Image, ImageSphere
+        a.imageRepeatX = 1
+        a.imageRepeatY = 1
 
     #this doesn't work for some reason
-    AnnotationAtts.backgroundImage = background_image
-    v.SetAnnotationAttributes(AnnotationAtts)
+    a.backgroundImage = background_image
+    v.SetAnnotationAttributes(a)
     
     View3DAtts = v.View3DAttributes()
     View3DAtts.viewNormal = (0, 0, 1)
@@ -136,7 +141,7 @@ L1.arrow2Height = 0.2
 L1.arrow2Radius = 0.075
 
 L2.useForegroundForLineColor = 0
-L2.color = (45, 25, 95, 255)
+L2.color = (45, 70, 95, 255)
 L2.width = 3
 L2.arrow2 = 1
 L2.arrow2Height = 0.2
@@ -171,7 +176,7 @@ with open(bh_data, 'r') as file:
         v.DrawPlots()
         
         # Save the window
-        v.SaveWindow()
+        #v.SaveWindow()
 
 #frame_name_pattern = "synthetic_BH_test_animation_%04d.png"
 #movie_name = "streamline_crop_example.mp4"
