@@ -3,8 +3,6 @@ ScriptVersion = "3.3.1"
 if ScriptVersion != Version():
     print "This script is for VisIt %s. It may not work with version %s" % (ScriptVersion, Version())
 visit.ShowAllWindows()
-visit.OpenDatabase("../database/mesh/iscos_halfr_sphere_sub8.obj", 0)
-# The UpdateDBPluginInfo RPC is not supported in the VisIt module so it will not be logged.
 visit.AnnotationAtts = visit.AnnotationAttributes()
 AnnotationAtts.axes2D.visible = 0
 AnnotationAtts.axes2D.autoSetTicks = 1
@@ -177,8 +175,8 @@ AnnotationAtts.foregroundColor = (0, 0, 0, 255)
 AnnotationAtts.gradientBackgroundStyle = AnnotationAtts.LeftToRight  # TopToBottom, BottomToTop, LeftToRight, RightToLeft, Radial
 AnnotationAtts.gradientColor1 = (80, 80, 80, 255)
 AnnotationAtts.gradientColor2 = (70, 70, 70, 255)
-AnnotationAtts.backgroundMode = AnnotationAtts.Image  # Solid, Gradient, Image, ImageSphere
-AnnotationAtts.backgroundImage = "../database/background_images/blue_grid.png"
+AnnotationAtts.backgroundMode = AnnotationAtts.Gradient  # Solid, Gradient, Image, ImageSphere
+AnnotationAtts.backgroundImage = "/home/guest/Documents/BH_Vis/data/background_images/blue_grid.png"
 AnnotationAtts.imageRepeatX = 1
 AnnotationAtts.imageRepeatY = 1
 AnnotationAtts.axesArray.visible = 1
@@ -346,6 +344,8 @@ RenderingAtts.ospraySPP = 1
 RenderingAtts.osprayAO = 0
 RenderingAtts.osprayShadows = 0
 SetRenderingAttributes(RenderingAtts)
+visit.OpenDatabase("/home/guest/Documents/Tyndale/vscode/database//iscos_halfr_sphere_sub8.obj", 0)
+# The UpdateDBPluginInfo RPC is not supported in the VisIt module so it will not be logged.
 visit.AddPlot("Pseudocolor", "mesh_quality/warpage", 1, 1)
 visit.AddOperator("Transform", 1)
 PseudocolorAtts = visit.PseudocolorAttributes()
@@ -417,6 +417,64 @@ PseudocolorAtts.maxFlag = 1
 PseudocolorAtts.max = 0.1
 PseudocolorAtts.useAboveMaxColor = 1
 PseudocolorAtts.aboveMaxColor = (0, 255, 0, 255)
+PseudocolorAtts.centering = PseudocolorAtts.Natural  # Natural, Nodal, Zonal
+PseudocolorAtts.colorTableName = "Default"
+PseudocolorAtts.invertColorTable = 0
+PseudocolorAtts.opacityType = PseudocolorAtts.FullyOpaque  # ColorTable, FullyOpaque, Constant, Ramp, VariableRange
+PseudocolorAtts.opacityVariable = ""
+PseudocolorAtts.opacity = 1
+PseudocolorAtts.opacityVarMin = 0
+PseudocolorAtts.opacityVarMax = 1
+PseudocolorAtts.opacityVarMinFlag = 0
+PseudocolorAtts.opacityVarMaxFlag = 0
+PseudocolorAtts.pointSize = 0.05
+PseudocolorAtts.pointType = PseudocolorAtts.Point  # Box, Axis, Icosahedron, Octahedron, Tetrahedron, SphereGeometry, Point, Sphere
+PseudocolorAtts.pointSizeVarEnabled = 0
+PseudocolorAtts.pointSizeVar = "default"
+PseudocolorAtts.pointSizePixels = 2
+PseudocolorAtts.lineType = PseudocolorAtts.Line  # Line, Tube, Ribbon
+PseudocolorAtts.lineWidth = 0
+PseudocolorAtts.tubeResolution = 10
+PseudocolorAtts.tubeRadiusSizeType = PseudocolorAtts.FractionOfBBox  # Absolute, FractionOfBBox
+PseudocolorAtts.tubeRadiusAbsolute = 0.125
+PseudocolorAtts.tubeRadiusBBox = 0.005
+PseudocolorAtts.tubeRadiusVarEnabled = 0
+PseudocolorAtts.tubeRadiusVar = ""
+PseudocolorAtts.tubeRadiusVarRatio = 10
+PseudocolorAtts.tailStyle = PseudocolorAtts.NONE  # NONE, Spheres, Cones
+PseudocolorAtts.headStyle = PseudocolorAtts.NONE  # NONE, Spheres, Cones
+PseudocolorAtts.endPointRadiusSizeType = PseudocolorAtts.FractionOfBBox  # Absolute, FractionOfBBox
+PseudocolorAtts.endPointRadiusAbsolute = 0.125
+PseudocolorAtts.endPointRadiusBBox = 0.05
+PseudocolorAtts.endPointResolution = 10
+PseudocolorAtts.endPointRatio = 5
+PseudocolorAtts.endPointRadiusVarEnabled = 0
+PseudocolorAtts.endPointRadiusVar = ""
+PseudocolorAtts.endPointRadiusVarRatio = 10
+PseudocolorAtts.renderSurfaces = 1
+PseudocolorAtts.renderWireframe = 0
+PseudocolorAtts.renderPoints = 0
+PseudocolorAtts.smoothingLevel = 0
+PseudocolorAtts.legendFlag = 1
+PseudocolorAtts.lightingFlag = 1
+PseudocolorAtts.wireframeColor = (0, 0, 0, 0)
+PseudocolorAtts.pointColor = (0, 0, 0, 0)
+visit.SetPlotOptions(PseudocolorAtts)
+visit.OpenDatabase("/home/guest/Documents/BH_Vis/data/mesh/test1/state*.vts database", 0)
+visit.AddPlot("Mesh", "mesh", 1, 1)
+visit.AddPlot("Pseudocolor", "mesh_quality/degree", 1, 1)
+PseudocolorAtts = visit.PseudocolorAttributes()
+PseudocolorAtts.scaling = PseudocolorAtts.Linear  # Linear, Log, Skew
+PseudocolorAtts.skewFactor = 1
+PseudocolorAtts.limitsMode = PseudocolorAtts.OriginalData  # OriginalData, ActualData
+PseudocolorAtts.minFlag = 1
+PseudocolorAtts.min = -0.1
+PseudocolorAtts.useBelowMinColor = 1
+PseudocolorAtts.belowMinColor = (31, 31, 31, 255)
+PseudocolorAtts.maxFlag = 1
+PseudocolorAtts.max = 0.1
+PseudocolorAtts.useAboveMaxColor = 1
+PseudocolorAtts.aboveMaxColor = (67, 91, 122, 255)
 PseudocolorAtts.centering = PseudocolorAtts.Natural  # Natural, Nodal, Zonal
 PseudocolorAtts.colorTableName = "Default"
 PseudocolorAtts.invertColorTable = 0
@@ -475,6 +533,7 @@ visit.SetPlotOptions(PseudocolorAtts)
 # Logging for SetAnnotationObjectOptions is not implemented yet.
 # Logging for SetAnnotationObjectOptions is not implemented yet.
 visit.DrawPlots()
+visit.TimeSliderNextState()
 # Logging for SetAnnotationObjectOptions is not implemented yet.
 # Logging for SetAnnotationObjectOptions is not implemented yet.
 # Logging for SetAnnotationObjectOptions is not implemented yet.
@@ -521,7 +580,51 @@ TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint
 TransformAtts.transformVectors = 1
 visit.SetOperatorOptions(TransformAtts, 0, 1)
 visit.SetActivePlots(0)
+# Begin spontaneous state
+View3DAtts = visit.View3DAttributes()
+View3DAtts.viewNormal = (-0.21295, -0.959169, 0.186139)
+View3DAtts.focus = (0, 0, 0.250002)
+View3DAtts.viewUp = (-0.0774448, 0.20648, 0.975381)
+View3DAtts.viewAngle = 30
+View3DAtts.parallelScale = 14.0564
+View3DAtts.nearPlane = -28.1128
+View3DAtts.farPlane = 28.1128
+View3DAtts.imagePan = (0, 0)
+View3DAtts.imageZoom = 0.826446
+View3DAtts.perspective = 1
+View3DAtts.eyeAngle = 2
+View3DAtts.centerOfRotationSet = 0
+View3DAtts.centerOfRotation = (0, 0, 0.250002)
+View3DAtts.axis3DScaleFlag = 0
+View3DAtts.axis3DScales = (1, 1, 1)
+View3DAtts.shear = (0, 0, 1)
+View3DAtts.windowValid = 1
+visit.SetView3D(View3DAtts)
+# End spontaneous state
+
 visit.SetActivePlots(1)
+# Begin spontaneous state
+View3DAtts = visit.View3DAttributes()
+View3DAtts.viewNormal = (-0.21295, -0.959169, 0.186139)
+View3DAtts.focus = (0, 0, 0.250002)
+View3DAtts.viewUp = (-0.0774448, 0.20648, 0.975381)
+View3DAtts.viewAngle = 30
+View3DAtts.parallelScale = 14.0564
+View3DAtts.nearPlane = -28.1128
+View3DAtts.farPlane = 28.1128
+View3DAtts.imagePan = (0, 0)
+View3DAtts.imageZoom = 1.4641
+View3DAtts.perspective = 1
+View3DAtts.eyeAngle = 2
+View3DAtts.centerOfRotationSet = 0
+View3DAtts.centerOfRotation = (0, 0, 0.250002)
+View3DAtts.axis3DScaleFlag = 0
+View3DAtts.axis3DScales = (1, 1, 1)
+View3DAtts.shear = (0, 0, 1)
+View3DAtts.windowValid = 1
+visit.SetView3D(View3DAtts)
+# End spontaneous state
+
 visit.SetActivePlots(1)
 TransformAtts = visit.TransformAttributes()
 TransformAtts.doRotate = 0
@@ -564,6 +667,7 @@ TransformAtts.transformVectors = 1
 visit.SetOperatorOptions(TransformAtts, 0, 0)
 visit.SetActivePlots(1)
 visit.DrawPlots()
+visit.TimeSliderNextState()
 # Logging for SetAnnotationObjectOptions is not implemented yet.
 # Logging for SetAnnotationObjectOptions is not implemented yet.
 # Logging for SetAnnotationObjectOptions is not implemented yet.
@@ -584,7 +688,7 @@ TransformAtts.scaleZ = 1
 TransformAtts.doTranslate = 1
 TransformAtts.translateX = 4.98831
 TransformAtts.translateY = 0
-TransformAtts.translateZ = 0
+TransformAtts.translateZ = 1
 TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
 TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
 TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
@@ -626,7 +730,7 @@ TransformAtts.scaleZ = 1
 TransformAtts.doTranslate = 1
 TransformAtts.translateX = -4.98831
 TransformAtts.translateY = -0
-TransformAtts.translateZ = 0
+TransformAtts.translateZ = 1
 TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
 TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
 TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
@@ -653,6 +757,7 @@ TransformAtts.transformVectors = 1
 visit.SetOperatorOptions(TransformAtts, 0, 0)
 visit.SetActivePlots(1)
 visit.DrawPlots()
+visit.TimeSliderNextState()
 # Logging for SetAnnotationObjectOptions is not implemented yet.
 # Logging for SetAnnotationObjectOptions is not implemented yet.
 # Logging for SetAnnotationObjectOptions is not implemented yet.
@@ -673,7 +778,7 @@ TransformAtts.scaleZ = 1
 TransformAtts.doTranslate = 1
 TransformAtts.translateX = 4.98032
 TransformAtts.translateY = 0.278443
-TransformAtts.translateZ = 0
+TransformAtts.translateZ = 1
 TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
 TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
 TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
@@ -715,7 +820,7 @@ TransformAtts.scaleZ = 1
 TransformAtts.doTranslate = 1
 TransformAtts.translateX = -4.98032
 TransformAtts.translateY = -0.278443
-TransformAtts.translateZ = 0
+TransformAtts.translateZ = 1
 TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
 TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
 TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
@@ -742,6 +847,7 @@ TransformAtts.transformVectors = 1
 visit.SetOperatorOptions(TransformAtts, 0, 0)
 visit.SetActivePlots(1)
 visit.DrawPlots()
+visit.TimeSliderNextState()
 # Logging for SetAnnotationObjectOptions is not implemented yet.
 # Logging for SetAnnotationObjectOptions is not implemented yet.
 # Logging for SetAnnotationObjectOptions is not implemented yet.
@@ -762,7 +868,7 @@ TransformAtts.scaleZ = 1
 TransformAtts.doTranslate = 1
 TransformAtts.translateX = 4.9568
 TransformAtts.translateY = 0.555994
-TransformAtts.translateZ = 0
+TransformAtts.translateZ = 1
 TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
 TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
 TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
@@ -788,3 +894,3153 @@ TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint
 TransformAtts.transformVectors = 1
 visit.SetOperatorOptions(TransformAtts, 0, 0)
 visit.SetActivePlots(0)
+visit.SetActivePlots(1)
+visit.SetActivePlots(1)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = -4.9568
+TransformAtts.translateY = -0.555994
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(1)
+visit.DrawPlots()
+visit.TimeSliderNextState()
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+visit.SetActivePlots(0)
+visit.SetActivePlots(0)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = 4.91782
+TransformAtts.translateY = 0.831788
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(0)
+visit.SetActivePlots(1)
+visit.SetActivePlots(1)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = -4.91782
+TransformAtts.translateY = -0.831788
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(1)
+visit.DrawPlots()
+visit.TimeSliderNextState()
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+visit.SetActivePlots(0)
+visit.SetActivePlots(0)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = 4.86351
+TransformAtts.translateY = 1.10496
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(0)
+visit.SetActivePlots(1)
+visit.SetActivePlots(1)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = -4.86351
+TransformAtts.translateY = -1.10496
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(1)
+visit.DrawPlots()
+visit.TimeSliderNextState()
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+visit.SetActivePlots(0)
+visit.SetActivePlots(0)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = 4.79403
+TransformAtts.translateY = 1.37467
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(0)
+visit.SetActivePlots(1)
+visit.SetActivePlots(1)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = -4.79403
+TransformAtts.translateY = -1.37467
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(1)
+visit.DrawPlots()
+visit.TimeSliderNextState()
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+visit.SetActivePlots(0)
+visit.SetActivePlots(0)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = 4.70961
+TransformAtts.translateY = 1.64006
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(0)
+visit.SetActivePlots(1)
+visit.SetActivePlots(1)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = -4.70961
+TransformAtts.translateY = -1.64006
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(1)
+visit.DrawPlots()
+visit.TimeSliderNextState()
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+visit.SetActivePlots(0)
+visit.SetActivePlots(0)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = 4.6105
+TransformAtts.translateY = 1.90031
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(0)
+visit.SetActivePlots(1)
+visit.SetActivePlots(1)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = -4.6105
+TransformAtts.translateY = -1.90031
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(1)
+visit.DrawPlots()
+visit.TimeSliderNextState()
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+visit.SetActivePlots(0)
+visit.SetActivePlots(0)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = 4.49703
+TransformAtts.translateY = 2.15461
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(0)
+visit.SetActivePlots(1)
+visit.SetActivePlots(1)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = -4.49703
+TransformAtts.translateY = -2.15461
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(1)
+visit.DrawPlots()
+visit.TimeSliderNextState()
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+visit.SetActivePlots(0)
+visit.SetActivePlots(0)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = 4.36953
+TransformAtts.translateY = 2.40217
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(0)
+visit.SetActivePlots(1)
+visit.SetActivePlots(1)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = -4.36953
+TransformAtts.translateY = -2.40217
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(1)
+visit.DrawPlots()
+visit.TimeSliderNextState()
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+visit.SetActivePlots(0)
+visit.SetActivePlots(0)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = 4.22842
+TransformAtts.translateY = 2.64221
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(0)
+visit.SetActivePlots(1)
+visit.SetActivePlots(1)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = -4.22842
+TransformAtts.translateY = -2.64221
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(1)
+visit.DrawPlots()
+visit.TimeSliderNextState()
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+visit.SetActivePlots(0)
+visit.SetActivePlots(0)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = 4.07414
+TransformAtts.translateY = 2.87399
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(0)
+visit.SetActivePlots(1)
+visit.SetActivePlots(1)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = -4.07414
+TransformAtts.translateY = -2.87399
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(1)
+visit.DrawPlots()
+visit.TimeSliderNextState()
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+visit.SetActivePlots(0)
+visit.SetActivePlots(0)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = 3.90716
+TransformAtts.translateY = 3.09678
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(0)
+visit.SetActivePlots(1)
+visit.SetActivePlots(1)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = -3.90716
+TransformAtts.translateY = -3.09678
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(1)
+visit.DrawPlots()
+visit.TimeSliderNextState()
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+visit.SetActivePlots(0)
+visit.SetActivePlots(0)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = 3.72801
+TransformAtts.translateY = 3.30989
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(0)
+visit.SetActivePlots(1)
+visit.SetActivePlots(1)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = -3.72801
+TransformAtts.translateY = -3.30989
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(1)
+visit.DrawPlots()
+visit.TimeSliderNextState()
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+visit.SetActivePlots(0)
+visit.SetActivePlots(0)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = 3.53726
+TransformAtts.translateY = 3.51265
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(0)
+visit.SetActivePlots(1)
+visit.SetActivePlots(1)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = -3.53726
+TransformAtts.translateY = -3.51265
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(1)
+visit.DrawPlots()
+visit.TimeSliderNextState()
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+visit.SetActivePlots(0)
+visit.SetActivePlots(0)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = 3.33549
+TransformAtts.translateY = 3.70443
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(0)
+visit.SetActivePlots(1)
+visit.SetActivePlots(1)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = -3.33549
+TransformAtts.translateY = -3.70443
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(1)
+visit.DrawPlots()
+visit.TimeSliderNextState()
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+visit.SetActivePlots(0)
+visit.SetActivePlots(0)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = 3.12333
+TransformAtts.translateY = 3.88464
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(0)
+visit.SetActivePlots(1)
+visit.SetActivePlots(1)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = -3.12333
+TransformAtts.translateY = -3.88464
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(1)
+visit.DrawPlots()
+visit.TimeSliderNextState()
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+visit.SetActivePlots(0)
+visit.SetActivePlots(0)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = 2.90146
+TransformAtts.translateY = 4.05272
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(0)
+visit.SetActivePlots(1)
+visit.SetActivePlots(1)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = -2.90146
+TransformAtts.translateY = -4.05272
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(1)
+visit.DrawPlots()
+visit.TimeSliderNextState()
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+visit.SetActivePlots(0)
+visit.SetActivePlots(0)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = 2.67056
+TransformAtts.translateY = 4.20813
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(0)
+visit.SetActivePlots(1)
+visit.SetActivePlots(1)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = -2.67056
+TransformAtts.translateY = -4.20813
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(1)
+visit.DrawPlots()
+visit.TimeSliderNextState()
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+visit.SetActivePlots(0)
+visit.SetActivePlots(0)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = 2.43136
+TransformAtts.translateY = 4.3504
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(0)
+visit.SetActivePlots(1)
+visit.SetActivePlots(1)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = -2.43136
+TransformAtts.translateY = -4.3504
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(1)
+visit.DrawPlots()
+visit.TimeSliderNextState()
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+visit.SetActivePlots(0)
+visit.SetActivePlots(0)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = 2.1846
+TransformAtts.translateY = 4.47909
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(0)
+visit.SetActivePlots(1)
+visit.SetActivePlots(1)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = -2.1846
+TransformAtts.translateY = -4.47909
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(1)
+visit.DrawPlots()
+visit.TimeSliderNextState()
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+visit.SetActivePlots(0)
+visit.SetActivePlots(0)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = 1.93105
+TransformAtts.translateY = 4.59379
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(0)
+visit.SetActivePlots(1)
+visit.SetActivePlots(1)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = -1.93105
+TransformAtts.translateY = -4.59379
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(1)
+visit.DrawPlots()
+visit.TimeSliderNextState()
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+visit.SetActivePlots(0)
+visit.SetActivePlots(0)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = 1.67151
+TransformAtts.translateY = 4.69415
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(0)
+visit.SetActivePlots(1)
+visit.SetActivePlots(1)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = -1.67151
+TransformAtts.translateY = -4.69415
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(1)
+visit.DrawPlots()
+visit.TimeSliderNextState()
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+visit.SetActivePlots(0)
+visit.SetActivePlots(0)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = 1.40679
+TransformAtts.translateY = 4.77986
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(0)
+visit.SetActivePlots(1)
+visit.SetActivePlots(1)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = -1.40679
+TransformAtts.translateY = -4.77986
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(1)
+visit.DrawPlots()
+visit.TimeSliderNextState()
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+visit.SetActivePlots(0)
+visit.SetActivePlots(0)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = 1.13771
+TransformAtts.translateY = 4.85064
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(0)
+visit.SetActivePlots(1)
+visit.SetActivePlots(1)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = -1.13771
+TransformAtts.translateY = -4.85064
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(1)
+visit.DrawPlots()
+visit.TimeSliderNextState()
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+visit.SetActivePlots(0)
+visit.SetActivePlots(0)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = 0.865111
+TransformAtts.translateY = 4.90629
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(0)
+visit.SetActivePlots(1)
+visit.SetActivePlots(1)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = -0.865111
+TransformAtts.translateY = -4.90629
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(1)
+visit.DrawPlots()
+visit.TimeSliderNextState()
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+visit.SetActivePlots(0)
+visit.SetActivePlots(0)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = 0.589849
+TransformAtts.translateY = 4.94662
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(0)
+visit.SetActivePlots(1)
+visit.SetActivePlots(1)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = -0.589849
+TransformAtts.translateY = -4.94662
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(1)
+visit.DrawPlots()
+visit.TimeSliderNextState()
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+visit.SetActivePlots(0)
+visit.SetActivePlots(0)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = 0.312782
+TransformAtts.translateY = 4.97153
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(0)
+visit.SetActivePlots(1)
+visit.SetActivePlots(1)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = -0.312782
+TransformAtts.translateY = -4.97153
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(1)
+visit.DrawPlots()
+visit.TimeSliderNextState()
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+visit.SetActivePlots(0)
+visit.SetActivePlots(0)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = 0.0347739
+TransformAtts.translateY = 4.98092
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(0)
+visit.SetActivePlots(1)
+visit.SetActivePlots(1)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = -0.0347739
+TransformAtts.translateY = -4.98092
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(1)
+visit.DrawPlots()
+visit.TimeSliderNextState()
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+visit.SetActivePlots(0)
+visit.SetActivePlots(0)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = -0.243307
+TransformAtts.translateY = 4.97477
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(0)
+visit.SetActivePlots(1)
+visit.SetActivePlots(1)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = 0.243307
+TransformAtts.translateY = -4.97477
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(1)
+visit.DrawPlots()
+visit.TimeSliderNextState()
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+visit.SetActivePlots(0)
+visit.SetActivePlots(0)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = -0.520593
+TransformAtts.translateY = 4.95311
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(0)
+visit.SetActivePlots(1)
+visit.SetActivePlots(1)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = 0.520593
+TransformAtts.translateY = -4.95311
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(1)
+visit.DrawPlots()
+visit.TimeSliderNextState()
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+visit.SetActivePlots(0)
+visit.SetActivePlots(0)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = -0.796218
+TransformAtts.translateY = 4.916
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(0)
+visit.SetActivePlots(1)
+visit.SetActivePlots(1)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = 0.796218
+TransformAtts.translateY = -4.916
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(1)
+visit.DrawPlots()
+visit.TimeSliderNextState()
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+visit.SetActivePlots(0)
+visit.SetActivePlots(0)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = -1.06932
+TransformAtts.translateY = 4.86356
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(0)
+visit.SetActivePlots(1)
+visit.SetActivePlots(1)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = 1.06932
+TransformAtts.translateY = -4.86356
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(1)
+visit.DrawPlots()
+visit.TimeSliderNextState()
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+visit.SetActivePlots(0)
+visit.SetActivePlots(0)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = -1.33905
+TransformAtts.translateY = 4.79595
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(0)
+visit.SetActivePlots(1)
+visit.SetActivePlots(1)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = 1.33905
+TransformAtts.translateY = -4.79595
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(1)
+visit.DrawPlots()
+visit.TimeSliderNextState()
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+visit.SetActivePlots(0)
+visit.SetActivePlots(0)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = -1.60457
+TransformAtts.translateY = 4.7134
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(0)
+visit.SetActivePlots(1)
+visit.SetActivePlots(1)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = 1.60457
+TransformAtts.translateY = -4.7134
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(1)
+visit.DrawPlots()
+visit.TimeSliderNextState()
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+visit.SetActivePlots(0)
+visit.SetActivePlots(0)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = -1.86505
+TransformAtts.translateY = 4.61615
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(0)
+visit.SetActivePlots(1)
+visit.SetActivePlots(1)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = 1.86505
+TransformAtts.translateY = -4.61615
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(1)
+visit.DrawPlots()
+visit.TimeSliderNextState()
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+visit.SetActivePlots(0)
+visit.SetActivePlots(0)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = -2.11967
+TransformAtts.translateY = 4.50452
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(0)
+visit.SetActivePlots(1)
+visit.SetActivePlots(1)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = 2.11967
+TransformAtts.translateY = -4.50452
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetActivePlots(1)
+visit.DrawPlots()
+visit.TimeSliderNextState()
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+# Logging for SetAnnotationObjectOptions is not implemented yet.
+visit.SetActivePlots(0)
+visit.SetActivePlots(0)
+TransformAtts = visit.TransformAttributes()
+TransformAtts.doRotate = 0
+TransformAtts.rotateOrigin = (0, 0, 0)
+TransformAtts.rotateAxis = (0, 0, 1)
+TransformAtts.rotateAmount = 0
+TransformAtts.rotateType = TransformAtts.Deg  # Deg, Rad
+TransformAtts.doScale = 0
+TransformAtts.scaleOrigin = (0, 0, 0)
+TransformAtts.scaleX = 1
+TransformAtts.scaleY = 1
+TransformAtts.scaleZ = 1
+TransformAtts.doTranslate = 1
+TransformAtts.translateX = -2.36764
+TransformAtts.translateY = 4.37886
+TransformAtts.translateZ = 1
+TransformAtts.transformType = TransformAtts.Similarity  # Similarity, Coordinate, Linear
+TransformAtts.inputCoordSys = TransformAtts.Cartesian  # Cartesian, Cylindrical, Spherical
+TransformAtts.outputCoordSys = TransformAtts.Spherical  # Cartesian, Cylindrical, Spherical
+TransformAtts.continuousPhi = 0
+TransformAtts.m00 = 1
+TransformAtts.m01 = 0
+TransformAtts.m02 = 0
+TransformAtts.m03 = 0
+TransformAtts.m10 = 0
+TransformAtts.m11 = 1
+TransformAtts.m12 = 0
+TransformAtts.m13 = 0
+TransformAtts.m20 = 0
+TransformAtts.m21 = 0
+TransformAtts.m22 = 1
+TransformAtts.m23 = 0
+TransformAtts.m30 = 0
+TransformAtts.m31 = 0
+TransformAtts.m32 = 0
+TransformAtts.m33 = 1
+TransformAtts.invertLinearTransform = 0
+TransformAtts.vectorTransformMethod = TransformAtts.AsDirection  # NONE, AsPoint, AsDisplacement, AsDirection
+TransformAtts.transformVectors = 1
+visit.SetOperatorOptions(TransformAtts, 0, 0)
+visit.SetA
