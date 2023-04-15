@@ -20,15 +20,15 @@ record_render = False
 ###File names
 
 #Note: fix this db path
-bh_database = "/home/guest/Documents/Tyndale/vscode/database//iscos_halfr_sphere_sub8.obj"
+bh_database = "/home/guest/Documents/BH_Vis/data/mesh/spheres/iscos_sphere_sub8.obj"
 
 bh_data = parent_directory + "/data/synthetic_coords/synthetic_data_ang_momentum.csv"
-gw_database = parent_directory + "/data/mesh/test1/state*.vts database"
+gw_database = parent_directory + "/data/mesh/synth_gw/test15/state*.vts database"
 
 #Background Image Citation: ESA/Hubble & NASA, https://www.nasa.gov/image-feature/goddard/2016/hubble-spots-an-irregular-island-in-a-sea-of-space
 background_image = parent_directory + "/data/background_images/blue_grid.png"
 frame_name = "synthetic_BH_test_animation"
-movie_output_destination = parent_directory + "/movies/movie1"
+movie_output_destination = parent_directory + "/movies/movie2"
 
 ###Parameters
 green_screen = False
@@ -161,14 +161,14 @@ L2 = v.CreateAnnotationObject("Line3D")
 #print(L1) 
 
 L1.useForegroundForLineColor = 0
-L1.color = (75, 35, 115, 255)
+L1.color = (255, 255, 255, 255)
 L1.width = 3
 L1.arrow2 = 1
 L1.arrow2Height = 0.2
 L1.arrow2Radius = 0.075
 
 L2.useForegroundForLineColor = 0
-L2.color = (45, 70, 95, 255)
+L2.color = (255, 255, 255, 255)
 L2.width = 3
 L2.arrow2 = 1
 L2.arrow2Height = 0.2
@@ -184,13 +184,13 @@ with open(bh_data, 'r') as file:
         t = float(row[0])
         bh1_x = float(row[1])
         bh1_y = float(row[2])
-        bh1_z = float(row[3])
+        bh1_z = 2 #float(row[3])
         L1_x = float(row[4])
         L1_y = float(row[5])
         L1_z = float(row[6])
         bh2_x = float(row[7])
         bh2_y = float(row[8])
-        bh2_z = float(row[9])
+        bh2_z = 2 #float(row[9])
         L2_x = float(row[10])
         L2_y = float(row[11])
         L2_z = float(row[12])
@@ -202,9 +202,16 @@ with open(bh_data, 'r') as file:
         set_coords(0, bh1_x, bh1_y, bh1_z)
         set_coords(1, bh2_x, bh2_y, bh2_z)
         v.DrawPlots()
-        
-        if record_render:
-            v.SaveWindow()
+        s = v.SaveWindowAttributes()
+        s.fileName = "synthetic_BH_test_animation"
+        s.format = s.PNG
+        s.progressive = 1
+        s.width = 772
+        s.height = 702
+        s.screenCapture = 1
+        v.SetSaveWindowAttributes(s)
+        # Save the window
+        v.SaveWindow()
 
 #frame_name_pattern = "synthetic_BH_test_animation_%04d.png"
 #movie_name = "streamline_crop_example.mp4"
