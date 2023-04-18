@@ -211,7 +211,7 @@ with open(bh_data, 'r') as file:
         s.screenCapture = 1
         v.SetSaveWindowAttributes(s)
         # Save the window
-        v.SaveWindow()
+        #v.SaveWindow()
 
 #frame_name_pattern = "synthetic_BH_test_animation_%04d.png"
 #movie_name = "streamline_crop_example.mp4"
